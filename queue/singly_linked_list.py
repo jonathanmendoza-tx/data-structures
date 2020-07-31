@@ -62,22 +62,47 @@ class LinkedList:
             self.length -=1
             return value
 
+    def remove_tail(self):
+
+        if self.head is None:
+            return None
+
+        elif self.head == self.tail:
+            value = self.tail.get_value()
+            self.head = None
+            self.tail = None
+            self.length -= 1
+
+            return value
+
+        else:
+            cur_node = self.head
+
+            while cur_node.get_next() is not self.tail:
+                cur_node = cur_node.get_next()
+
+            value = self.tail.get_value()
+            cur_node.set_next(None)
+            self.tail = cur_node
+            self.length -= 1
+
+            return value
+
+
 
     def contains(self, value):
 
         if self.head is not None:
             cur_node = self.head
-            contains = False
 
             while cur_node is not None:
                 if cur_node.get_value() is value:
-                    contains = True
-                    return contains
+                    return True
 
                 else:
                     cur_node = cur_node.get_next()
 
-            return contains
+            return False
 
         else:
             return None
